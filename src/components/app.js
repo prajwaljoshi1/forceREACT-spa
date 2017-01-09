@@ -5,8 +5,10 @@ import Header from './header';
 export default class App extends Component {
   render() {
     return (
-      <Header>
-      <h1>forceReact</h1>
+      <div>
+        <Header />
+        {this.props.children}
+      </div>
     );
   }
 }
