@@ -1,7 +1,7 @@
 # themeReact
 
 
-###An admin template made for intygrate's react projects###
+###An admin template made for intygrate's react webapps  with cognito Auth ###
 
 
 ###Getting Started###
