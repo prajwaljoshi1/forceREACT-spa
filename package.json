@@ -1,9 +1,9 @@
 {
-  "name": "redux-simple-starter",
+  "name": "themeReact",
   "version": "1.0.0",
-  "description": "Simple starter package for Redux with React and Babel support",
+  "description": "intygrate's REACT series project starter package for Redux with React and Babel support authentication with AWS cognito ",
   "main": "index.js",
-  "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
+  "repository": "",
   "scripts": {
     "build": "webpack",
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",

@@ -4,6 +4,8 @@ import { browserHistory } from 'react-router';
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails  } from "amazon-cognito-identity-js";
 import cognitoConfig from "../cognito-config";
 
+import { AUTH_USER , AUTH_ERROR} from './types';
+
 
 Config.region = cognitoConfig.region;
 Config.credentials = new CognitoIdentityCredentials({
@@ -49,20 +51,11 @@ export function signinUser({ email, password }){
         },
 
         onFailure: function(err) {
-            alert(err);
+          console.log(err.message);
+            dispatch(authError(err.message));
         },
 
     });
-
-
-    // submit email/password to cognito
-    //
-    // if request is good update state to indicate user is authenticated
-    // save jwt token
-    // redirect to route/home
-    //
-    // if the request is bad show an error to the user
-
 
   }
 
@@ -93,11 +86,10 @@ export function signinUser({ email, password }){
     ];
 
     return function(dispatch){
-        const username = givenName.tolowercase,"",Date.now().toString();
+        const username =givenName.toLowercase + Date.now().toString();
         userPool.signUp(username, password, attributeList, null, (err, result) => {
             if (err) {
-              console.log();
-                //dispatch(authError('System Error!, please contact support.'));
+                dispatch(authError('System Error!, please contact support.'));
                 return;
               }
                 //dispatch({type:AUTH_USER})
@@ -108,4 +100,12 @@ export function signinUser({ email, password }){
     }
 
 
+}
+
+
+export function authError(error){
+   return {
+     type: AUTH_ERROR,
+     payload:error
+   }
 }
