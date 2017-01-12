@@ -1,3 +1,16 @@
 .error{
   color:red;
 }
+
+.navbar-nav > li.navbar-auth {
+    float: right !important;
+    margin: 1em;
+  }
+
+.auth-list-active{
+  color: blue;
+}
+/*bootstrap 4 fix*/
+.navbar-nav{
+  display: inline-block;
+}

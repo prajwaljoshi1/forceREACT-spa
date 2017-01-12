@@ -25,22 +25,45 @@ class Signin extends Component{
 
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset>
-        <label>Email:</label>
+        <fieldset className="form-group">
+          <label>Email:</label>
         <input {...email} className="form-control" />
-        </fieldset>
-        <fieldset>
-        <label>Password:</label>
-        <input {...password} className="form-control" />
-        </fieldset>
-        <fieldset>
-        {this.renderAlert()}
+        {email.touched && email.error  && <div className="error">{email.error}</div>}
+
           </fieldset>
+        <fieldset className="form-group">
+        <label>Password:</label>
+          <input {...password} className="form-control" />
+          {password.touched && password.error  && <div className="error">{password.error}</div>}
+
+        </fieldset>
+        <fieldset className="form-group">
+          {this.renderAlert()}
+        </fieldset>
         <button action="submit"  className="btn btn-primary">Sign in</button>
       </form>)
   }
 
 }
+
+
+function validate(formProps){
+  const errors = {};
+
+    if(!formProps.email){
+      errors.email = 'Please enter your Email'
+    }
+
+    if(!formProps.mobile){
+      errors.password = 'Please enter your password'
+    }
+
+
+
+  return errors;
+}
+
+
 
 
 function mapStateToProps(state){
@@ -51,5 +74,6 @@ function mapStateToProps(state){
 
 export default reduxForm({
   form:'Signin',
-  fields: ['email', 'password']
+  fields: ['email', 'password'],
+  validate
 }, mapStateToProps, actions)(Signin);

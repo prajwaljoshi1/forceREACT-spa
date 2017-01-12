@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails  } from "amazon-cognito-identity-js";
 import cognitoConfig from "../cognito-config";
 
-import { AUTH_USER , AUTH_ERROR} from './types';
+import { AUTH_USER , AUTH_ERROR, UNAUTH_USER} from './types';
 
 
 Config.region = cognitoConfig.region;
@@ -44,14 +44,14 @@ export function signinUser({ email, password }){
         onSuccess: function (result) {
             dispatch({type: AUTH_USER});
             //save the Json web token
-            localStorage.setItem('token',result.getAccessToken().getJwtToken());
+            //localStorage.setItem('token',result.getAccessToken().getJwtToken()); cognito has its own
             //redirect user to home
             browserHistory.push('/home')
 
         },
 
         onFailure: function(err) {
-          console.log(err.message);
+
             dispatch(authError(err.message));
         },
 
@@ -89,17 +89,34 @@ export function signinUser({ email, password }){
         const username =givenName.toLowercase + Date.now().toString();
         userPool.signUp(username, password, attributeList, null, (err, result) => {
             if (err) {
-                dispatch(authError('System Error!, please contact support.'));
+              console.log("HADOOP");
+                dispatch(authError(err.message));
                 return;
               }
                 //dispatch({type:AUTH_USER})
-                console.dir(result);
+                console.log("result");
                 browserHistory.push('/payment');
               });
 
     }
 
 
+}
+
+
+export function signoutUser(){
+  //localStorage.removeItem('token'); //cognito has its own
+  const user = localStorage.getItem("CognitoIdentityServiceProvider.5q9vq8tbro1m2pol9dp7jp277i.LastAuthUser");
+
+  const userData = {
+  Username :user ,
+  Pool : userPool
+};
+
+  const cognitoUser = new CognitoUser(userData);
+
+  cognitoUser.signOut();
+  return {type:UNAUTH_USER}
 }
 
 

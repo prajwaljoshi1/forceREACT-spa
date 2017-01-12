@@ -8,11 +8,10 @@ import { Link } from 'react-router';
 
 
    renderLinks(){
-
      if(this.props.authenticated){
 
-       return<li className="nav-item" key={3}>
-         <Link  className="nav-link" to="/signout">
+       return<li className="nav-item navbar-auth" key={3}>
+         <Link  className="nav-link" to="/signout" >
              Sign out
          </Link>
          </li>
@@ -20,13 +19,13 @@ import { Link } from 'react-router';
      } else{
 
        return [
-         <li className="nav-item" key={2}>
-         <Link  className="nav-link" to="/signin">
+         <li className="nav-item navbar-auth" key={2}>
+         <Link  className="nav-link" to="/signin" activeClassName="auth-list-active">
              Sign In
          </Link>
          </li>,
-         <li className="nav-item" key={1}>
-         <Link  className="nav-link" to="/signup">
+         <li className="nav-item navbar-auth" key={1}>
+         <Link  className="nav-link" to="/signup" activeClassName="auth-list-active">
              Sign Up
          </Link>
          </li>
@@ -41,8 +40,7 @@ import { Link } from 'react-router';
   render(){
 
     return(
-    <nav className = "navbar  navbar-right navbar-light">
-    <Link to="/" className="navbar-brand">themeREACT</Link>
+    <nav className = "navbar">
         <ul className="nav navbar-nav">
             {this.renderLinks()}
         </ul>
@@ -59,4 +57,4 @@ function mapStateToProps(state){
 }
 
 
- export default connect()(Header)
+ export default connect(mapStateToProps)(Header)
