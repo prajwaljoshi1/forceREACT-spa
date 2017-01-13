@@ -24,6 +24,7 @@ class Signin extends Component{
     const { handleSubmit, fields:{ email, password }} = this.props;
 
     return(
+      <div className="container">
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className="form-group">
           <label>Email:</label>
@@ -41,7 +42,8 @@ class Signin extends Component{
           {this.renderAlert()}
         </fieldset>
         <button action="submit"  className="btn btn-primary">Sign in</button>
-      </form>)
+      </form>
+    </div>)
   }
 
 }
@@ -54,7 +56,7 @@ function validate(formProps){
       errors.email = 'Please enter your Email'
     }
 
-    if(!formProps.mobile){
+    if(!formProps.password){
       errors.password = 'Please enter your password'
     }
 

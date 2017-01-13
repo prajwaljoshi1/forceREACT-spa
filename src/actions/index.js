@@ -89,7 +89,6 @@ export function signinUser({ email, password }){
         const username =givenName.toLowercase + Date.now().toString();
         userPool.signUp(username, password, attributeList, null, (err, result) => {
             if (err) {
-              console.log("HADOOP");
                 dispatch(authError(err.message));
                 return;
               }
