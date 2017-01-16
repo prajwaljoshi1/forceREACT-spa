@@ -40,7 +40,7 @@ class Confirmation extends Component{
     return(
       <div className="container">
       <p>
-        An email has been sent to {this.props.userEmail} with a confirmation code. Please enter the code below to finish your registration.
+        An email has been sent to {this.props.userEmail} with a confirmation code.  Enter the code below to finish your registration.
       </p>
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className="form-group">

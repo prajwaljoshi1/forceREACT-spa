@@ -9,6 +9,10 @@ import { createStore, applyMiddleware } from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import reduxThunk from 'redux-thunk';
 
+import { CognitoUserPool } from "amazon-cognito-identity-js";
+
+
+
 
 
 import App from './components/app';
@@ -21,6 +25,7 @@ import Home from './components/home';
 import RequireAuth from './components/auth/require_auth';
 import Landing from './components/landing';
 import { AUTH_USER } from './actions/types';
+import cognitoConfig from './cognito-config';
 
 
 
@@ -37,12 +42,25 @@ import reducers from './reducers';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store =createStoreWithMiddleware(reducers);
 
-const accessToken = localStorage.getItem('CognitoIdentityServiceProvider.5q9vq8tbro1m2pol9dp7jp277i.1484188460538.accessToken');
+// const lastAuthUser = localStorage.getItem('CognitoIdentityServiceProvider.'+cognitoConfig.ClientId);
+// console.log(lastAuthUser);
+const poolData = {
+          UserPoolId : cognitoConfig.UserPoolId,
+          ClientId : cognitoConfig.ClientId
+        };
+var userPool = new CognitoUserPool(poolData);
+var cognitoUser = userPool.getCurrentUser();
 
+if (cognitoUser != null) {
+    cognitoUser.getSession(function(err, session) {
+        if (err) {
+           alert(err);
+            return;
+        }
+         store.dispatch({type: AUTH_USER});
+       });
+     }
 
-if(accessToken){
-   store.dispatch({type: AUTH_USER});
-}
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
