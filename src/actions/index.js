@@ -1,11 +1,11 @@
 
 import { Config, CognitoIdentityCredentials } from "aws-sdk";
-import { browserHistory } from 'react-router';
+import { browserHistory  } from 'react-router';
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails  } from "amazon-cognito-identity-js";
 import cognitoConfig from "../cognito-config";
 
 import { AUTH_USER , AUTH_ERROR, UNAUTH_USER} from './types';
-
+import {  USERNAME , USER_EMAIL , STRIPE_TOKEN, USER_PASSWORD } from '../actions/types';
 
 Config.region = cognitoConfig.region;
 Config.credentials = new CognitoIdentityCredentials({
@@ -21,6 +21,10 @@ const userPool = new CognitoUserPool({
 
 
 export function signinUser({ email, password }){
+
+  console.log("USERNAME: ", email , "    Password: ", password);
+
+
   const authenticationData = {
     Username: email,
     Password: password
@@ -46,6 +50,7 @@ export function signinUser({ email, password }){
             //save the Json web token
             //localStorage.setItem('token',result.getAccessToken().getJwtToken()); cognito has its own
             //redirect user to home
+
             browserHistory.push('/home')
 
         },
@@ -86,15 +91,29 @@ export function signinUser({ email, password }){
     ];
 
     return function(dispatch){
-        const username =givenName.toLowercase + Date.now().toString();
+        const username =givenName.toLowerCase() + Date.now().toString();
         userPool.signUp(username, password, attributeList, null, (err, result) => {
             if (err) {
                 dispatch(authError(err.message));
                 return;
               }
-                //dispatch({type:AUTH_USER})
-                console.log("result");
-                browserHistory.push('/payment');
+
+              dispatch({
+                type:USERNAME,
+                payload:username
+              });
+
+              dispatch({
+                type:USER_EMAIL,
+                payload:email
+              });
+
+              dispatch({
+                type:USER_PASSWORD,
+                payload:password
+              });
+
+                browserHistory.push('/confirmation');
               });
 
     }
@@ -125,3 +144,37 @@ export function authError(error){
      payload:error
    }
 }
+
+
+export function confirmUser({confirmationCode, username, password} ){
+  return function(dispatch){
+    var userData = {
+    Username : username,
+    Pool : userPool
+};
+
+var cognitoUser = new CognitoUser(userData);
+cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
+    if (err) {
+        dispatch(authError(err.message));
+        return;
+    }else{
+      if(result == "SUCCESS"){
+        // the action creator signinUser takes email only , however cognito works on both to be refactored later
+        dispatch(signinUser({email:username, password}));  
+      }
+    }
+
+
+});
+
+  }
+}
+
+export function resendVerificationCode(){
+  return function(dispatch){
+
+      browserHistory.push('/login');
+
+  }
+};
