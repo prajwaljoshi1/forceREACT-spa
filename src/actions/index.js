@@ -22,9 +22,6 @@ const userPool = new CognitoUserPool({
 
 export function signinUser({ email, password }){
 
-  console.log("USERNAME: ", email , "    Password: ", password);
-
-
   const authenticationData = {
     Username: email,
     Password: password
@@ -83,7 +80,7 @@ export function signinUser({ email, password }){
         Value: mobile
       }),new CognitoUserAttribute({
         Name: 'birthdate',
-        Value: "11-11-1111"
+        Value: "00-00-0000"
       }),new CognitoUserAttribute({
         Name: 'given_name',
         Value: givenName
@@ -148,12 +145,12 @@ export function authError(error){
 
 export function confirmUser({confirmationCode, username, password} ){
   return function(dispatch){
-    var userData = {
+    const userData = {
     Username : username,
     Pool : userPool
 };
 
-var cognitoUser = new CognitoUser(userData);
+const cognitoUser = new CognitoUser(userData);
 cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
     if (err) {
         dispatch(authError(err.message));
@@ -161,7 +158,7 @@ cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
     }else{
       if(result == "SUCCESS"){
         // the action creator signinUser takes email only , however cognito works on both to be refactored later
-        dispatch(signinUser({email:username, password}));  
+        dispatch(signinUser({email:username, password}));
       }
     }
 
@@ -171,10 +168,23 @@ cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
   }
 }
 
-export function resendVerificationCode(){
+export function resendVerificationCode({username}){
   return function(dispatch){
 
-      browserHistory.push('/login');
+    const userData = {
+      Username : username,
+      Pool : userPool
+    };
+
+const cognitoUser = new CognitoUser(userData);
+
+    cognitoUser.resendConfirmationCode(function(err, result) {
+        if (err) {
+            dispatch(authError(err.message));
+            return;
+        }
+        dispatch(authError("Confirmation code sent again."));
+    });
 
   }
 };
