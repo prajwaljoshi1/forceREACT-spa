@@ -4,16 +4,14 @@ import { Link } from 'react-router';
 
 
 
- class Navigation extends Component{
+ class HeaderApp extends Component{
 
   render(){
 
-
     return(
-      <div className="navigation-wrapper">
             <ul className="sidebar-nav">
                 <li className="sidebar-brand">
-                    <a href="#">
+                    <a href="/home">
                         themeREACT
                     </a>
                 </li>
@@ -23,35 +21,33 @@ import { Link } from 'react-router';
                   </Link>
                   </li>
                   <li className="nav-item navbar-app" key={5}>
-                    <Link  className="nav-link" to="/home" >
+                    <Link  className="nav-link" to="/page2" >
                         Task
                     </Link>
                     </li>
                     <li className="nav-item navbar-app" key={6}>
-                      <Link  className="nav-link" to="/home" >
+                      <Link  className="nav-link" to="/page3" >
                           Schedule
                       </Link>
                       </li>
                       <li className="nav-item navbar-app" key={7}>
-                        <Link  className="nav-link" to="/home" >
+                        <Link  className="nav-link" to="/page4" >
                             Help
                         </Link>
                         </li>
+                        <li className="nav-item navbar-auth" key={3}>
+                          <Link  className="nav-link" to="/signout" >
+                              Sign out
+                          </Link>
+                          </li>
 
             </ul>
-        </div>
-    )
+    );
 
-    return(
-    <nav className = "navbar">
-        <ul className="nav navbar-nav">
-            {this.renderLinks()}
-        </ul>
-    </nav>);
+
   }
-
 }
 
 
 
- export default Navigation
+ export default HeaderApp

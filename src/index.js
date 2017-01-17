@@ -22,6 +22,10 @@ import Signout from './components/auth/signout';
 import Confirmation from './components/auth/Confirmation';
 
 import Home from './components/home';
+import Page1 from './components/page1';
+import Page2 from './components/page2';
+import Page3 from './components/page3';
+import Page4 from './components/page4';
 import RequireAuth from './components/auth/require_auth';
 import Landing from './components/landing';
 import { AUTH_USER } from './actions/types';
@@ -42,15 +46,13 @@ import reducers from './reducers';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store =createStoreWithMiddleware(reducers);
 
-// const lastAuthUser = localStorage.getItem('CognitoIdentityServiceProvider.'+cognitoConfig.ClientId);
-// console.log(lastAuthUser);
+
 const poolData = {
           UserPoolId : cognitoConfig.UserPoolId,
           ClientId : cognitoConfig.ClientId
         };
 var userPool = new CognitoUserPool(poolData);
 var cognitoUser = userPool.getCurrentUser();
-
 if (cognitoUser != null) {
     cognitoUser.getSession(function(err, session) {
         if (err) {
@@ -61,6 +63,7 @@ if (cognitoUser != null) {
        });
      }
 
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -69,9 +72,13 @@ ReactDOM.render(
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
         <Route path="/confirmation" component={Confirmation} />
-      <Route path="/signout" component={Signout} />
+      <Route path="/signout" component={RequireAuth(Signout)} />
       <Route path="/home" component={RequireAuth(Home)} />
+      <Route path="/page1" component={RequireAuth(Page1)} />
+      <Route path="/page2" component={RequireAuth(Page2)} />
+      <Route path="/page3" component={RequireAuth(Page3)} />
+      <Route path="/page4" component={RequireAuth(Page4)} />
      </Route>
     </Router>
   </Provider>
-  , document.querySelector('.rendered'));
+  , document.getElementById('container'));

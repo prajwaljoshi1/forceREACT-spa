@@ -120,18 +120,29 @@ export function signinUser({ email, password }){
 
 
 export function signoutUser(){
-  //localStorage.removeItem('token'); //cognito has its own
-  const user = localStorage.getItem("CognitoIdentityServiceProvider.5q9vq8tbro1m2pol9dp7jp277i.LastAuthUser");
 
-  const userData = {
-  Username :user ,
-  Pool : userPool
-};
 
-  const cognitoUser = new CognitoUser(userData);
+  const poolData = {
+            UserPoolId : cognitoConfig.UserPoolId,
+            ClientId : cognitoConfig.ClientId
+          };
 
-  cognitoUser.signOut();
+
+  const userPool = new CognitoUserPool(poolData);
+
+  const cognitoUser = userPool.getCurrentUser();
+
+  if(cognitoUser != null){
+    cognitoUser.signOut();
+  }
   return {type:UNAUTH_USER}
+
+
+
+  //localStorage.removeItem('token'); //cognito has its own
+
+
+
 }
 
 
@@ -188,3 +199,11 @@ const cognitoUser = new CognitoUser(userData);
 
   }
 };
+
+
+// export function redirectAuthUserToHome({authStatus}){
+//     return function(dispatch){
+//
+//           //else dispatch welcome tasks
+//         }
+// }

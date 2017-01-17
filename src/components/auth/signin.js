@@ -34,7 +34,7 @@ class Signin extends Component{
           </fieldset>
         <fieldset className="form-group">
         <label>Password:</label>
-          <input {...password} className="form-control" />
+          <input {...password} className="form-control" type="password" />
           {password.touched && password.error  && <div className="error">{password.error}</div>}
 
         </fieldset>

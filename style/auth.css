@@ -4,12 +4,16 @@
 
 .navbar-nav > li.navbar-auth {
     float: right !important;
-    margin: 1em;
+    margin:1em;
+    paddding:0;
+    font-weight: bold;
   }
 
-.auth-list-active{
-  color: blue;
+.navbar-nav > li.navbar-auth > .nav-link {
+  color: #0275d8;
 }
+
+
 /*bootstrap 4 fix*/
 .navbar-nav{
   display: inline-block;

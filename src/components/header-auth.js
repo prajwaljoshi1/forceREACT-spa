@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 
 
- class Header extends Component{
+ class HeaderAuth extends Component{
 
 
    renderLinks(){
-     if(this.props.authenticated){
-
-       return<li className="nav-item navbar-auth" key={3}>
-         <Link  className="nav-link" to="/signout" >
-             Sign out
-         </Link>
-         </li>
-
-     } else{
 
        return [
          <li className="nav-item navbar-auth" key={2}>
@@ -31,7 +21,7 @@ import { Link } from 'react-router';
          </li>
        ];
      }
-   }
+
 
 
 
@@ -40,8 +30,9 @@ import { Link } from 'react-router';
   render(){
 
     return(
-    <nav className = "navbar">
-        <ul className="nav navbar-nav">
+    <nav className = "navbar  navbar-light">
+
+        <ul className="nav navbar-nav navbar-auth">
             {this.renderLinks()}
         </ul>
     </nav>);
@@ -50,11 +41,5 @@ import { Link } from 'react-router';
 }
 
 
-function mapStateToProps(state){
-  return{
-    authenticated: state.auth.authenticated
-  };
-}
 
-
- export default connect(mapStateToProps)(Header)
+ export default HeaderAuth;

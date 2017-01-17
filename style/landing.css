@@ -1,0 +1,23 @@
+
+
+.headline {
+    padding: 150px 0;
+    text-align: center;
+}
+
+.headline h1 {
+    color: #0275d8;
+    font-size: 70px;
+    height: 130px;
+    line-height: 120px;
+    font-weight: normal;
+}
+
+ .bold{
+  font-weight: bold; ;
+}
+
+.features{
+  min-height: 400px;
+  background: #0275d8;
+}
