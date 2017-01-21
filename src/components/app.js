@@ -6,6 +6,8 @@ import HeaderApp from './header-app';
 
 import classNames from 'classNames'
 
+import Payment from './auth/payment'
+
 
 class App extends Component {
 
@@ -17,7 +19,6 @@ class App extends Component {
 
   toggleSidenav(e){
     e.preventDefault();
-    console.log(this.state);
     if(this.state.toggled ==true){
       this.setState({toggled: false});
     }else{
@@ -30,32 +31,49 @@ class App extends Component {
 
 
 
+
+
+
   render() {
 
     let classes = classNames('application-wrapper', {toggled: this.state.toggled});
 
       if(this.props.authenticated){
-        console.log("23");
-          return (
-            <div>
-              <div className={classes}>
-              <div className="navigation-wrapper">
-                <HeaderApp />
-                </div>
-                <div className="page-content-wrapper">
-                <div className="container-fluid">
-                  <a href="#" className="btn btn-default btn-lg" onClick={this.toggleSidenav.bind(this)}> Menu</a>
-                  <div className="container">
-                        {this.props.children}
+        console.log(this.props.authenticated);
+        console.log(this.props.subscriptionStatus);
+
+        if(this.props.subscriptionStatus === 'ACTIVE'){
+            return (
+              <div>
+                <div className={classes}>
+                <div className="navigation-wrapper">
+                  <HeaderApp />
                   </div>
+                  <div className="page-content-wrapper">
+                  <div className="container-fluid">
+                    <a href="#" className="btn btn-default btn-lg" onClick={this.toggleSidenav.bind(this)}> Menu</a>
+                    <div className="container">
+                          {this.props.children}
+                    </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
+            );
+          }else if(this.props.subscriptionStatus === 'INACTIVE'){
+            console.log("rerer");
+          } else if(this.props.subscriptionStatus === 'UNSIGNED'){
+
+            return (<div>
+                  <Payment />
+                  </div>
+            );
+
+          }
+
+
 
       }else{
-        console.log("32");
         return (
             <div>
               <HeaderAuth />
@@ -70,7 +88,8 @@ class App extends Component {
 
 function mapStateToProps(state){
   return{
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    subscriptionStatus: state.auth.subscriptionStatus
   };
 }
 

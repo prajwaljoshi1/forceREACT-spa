@@ -7,12 +7,14 @@ class Signup extends Component{
   handleFormSubmit(formProps){
 
   this.props.signupUser({email:formProps.email, password:formProps.password, givenName:formProps.givenName, familyName:formProps.familyName, mobile:formProps.mobile})
+  //this.props.storeSignupDetails({email:formProps.email, password:formProps.password, givenName:formProps.givenName, familyName:formProps.familyName, mobile:formProps.mobile})
+
   }
 
   renderAlert(){
     if(this.props.errorMessage){
       return(
-            <div className="alert alert-danger">
+            <div className="alert alert-danger ">
                 {this.props.errorMessage}
             </div>
       );

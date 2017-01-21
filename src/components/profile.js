@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 
-export default class Page4 extends Component {
+export default class Profile extends Component {
   render() {
     return (
       <div>
-       <h1>Page 4</h1>
+       <h1>User Profile</h1>
       </div>
     );
   }

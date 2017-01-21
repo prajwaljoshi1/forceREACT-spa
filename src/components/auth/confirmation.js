@@ -68,10 +68,6 @@ function validate(formProps){
       errors.confirmationCode = 'Please enter verification code';
     }
 
-
-
-
-
   return errors;
 }
 
@@ -83,7 +79,7 @@ function mapStateToProps(state){
     errorMessage: state.auth.error,
     username: state.signup.username,
     userEmail: state.signup.userEmail,
-    userPassword: state.signup.userPassword
+    userPassword: state.signup.userPassword,
   }
 }
 

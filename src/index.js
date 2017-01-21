@@ -19,29 +19,22 @@ import App from './components/app';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
+import Payment from './components/auth/payment';
 import Confirmation from './components/auth/Confirmation';
 
-import Home from './components/home';
-import Page1 from './components/page1';
-import Page2 from './components/page2';
-import Page3 from './components/page3';
-import Page4 from './components/page4';
+import Dashboard from './components/dashboard';
+import Tasks from './components/tasks';
+import Schedules from './components/schedules';
+import Profile from './components/profile';
 import RequireAuth from './components/auth/require_auth';
 import Landing from './components/landing';
-import { AUTH_USER } from './actions/types';
+import { AUTH_USER, SUBSCRIPTION_STATUS } from './actions/types';
 import cognitoConfig from './cognito-config';
-
-
-
+import axios from  'axios';
 
 import reducers from './reducers';
 
-
-
-
-
-
-
+import API from './api-url';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store =createStoreWithMiddleware(reducers);
@@ -54,31 +47,53 @@ const poolData = {
 var userPool = new CognitoUserPool(poolData);
 var cognitoUser = userPool.getCurrentUser();
 if (cognitoUser != null) {
-    cognitoUser.getSession(function(err, session) {
-        if (err) {
-           alert(err);
-            return;
-        }
+     cognitoUser.getSession(function(err, session) {
+         if (err) {
+            alert(err);
+             return;
+         }
+
          store.dispatch({type: AUTH_USER});
-       });
+         const authCode = session.idToken.jwtToken ;
+         axios.get(API.getSubscriptionStatus, {
+                    headers: {
+                        'Content-Type':'application/json',
+                        'Authorization': authCode
+                        }
+                      })
+                      .then(function (response) {
+
+                           store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
+                           console.log("RESPONSE => ", response.data);
+
+                          renderApp();
+
+                        });
+
+        });
+     }else{
+       renderApp()
      }
 
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={browserHistory}>
-     <Route   path="/" component={App} >
-     <IndexRoute component={Landing}/>
-      <Route path="/signin" component={Signin} />
-      <Route path="/signup" component={Signup} />
-        <Route path="/confirmation" component={Confirmation} />
-      <Route path="/signout" component={RequireAuth(Signout)} />
-      <Route path="/home" component={RequireAuth(Home)} />
-      <Route path="/page1" component={RequireAuth(Page1)} />
-      <Route path="/page2" component={RequireAuth(Page2)} />
-      <Route path="/page3" component={RequireAuth(Page3)} />
-      <Route path="/page4" component={RequireAuth(Page4)} />
-     </Route>
-    </Router>
-  </Provider>
-  , document.getElementById('container'));
+
+  function renderApp(){
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={browserHistory}>
+         <Route   path="/" component={App} >
+         <IndexRoute component={Landing}/>
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/confirmation" component={Confirmation} />
+          <Route path="/payment" component={RequireAuth(Payment)} />
+          <Route path="/signout" component={RequireAuth(Signout)} />
+          <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+          <Route path="/tasks" component={RequireAuth(Tasks)} />
+          <Route path="/schedules" component={RequireAuth(Schedules)} />
+          <Route path="/profile" component={RequireAuth(Profile)} />
+         </Route>
+        </Router>
+      </Provider>
+      , document.getElementById('container'));
+  }

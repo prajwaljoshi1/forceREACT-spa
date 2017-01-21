@@ -1,5 +1,5 @@
 
-import { AUTH_USER , UNAUTH_USER, AUTH_ERROR } from '../actions/types';
+import { AUTH_USER , UNAUTH_USER, AUTH_ERROR,SUBSCRIPTION_STATUS } from '../actions/types';
 
 export default function(state = {}, action ){
   switch(action.type){
@@ -14,6 +14,12 @@ export default function(state = {}, action ){
     case AUTH_ERROR:
       {
         return {...state , error:action.payload}
+      }
+
+    case SUBSCRIPTION_STATUS:
+      console.log("=> ", action.payload);
+      {
+        return {...state , subscriptionStatus:action.payload}
       }
 
   }

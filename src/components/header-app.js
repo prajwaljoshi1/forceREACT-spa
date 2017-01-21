@@ -11,28 +11,28 @@ import { Link } from 'react-router';
     return(
             <ul className="sidebar-nav">
                 <li className="sidebar-brand">
-                    <a href="/home">
+                    <a href="/dashboard">
                         themeREACT
                     </a>
                 </li>
                 <li className="nav-item navbar-app" key={4}>
-                  <Link  className="nav-link" to="/home" >
-                      Home
+                  <Link  className="nav-link" to="/dashboard" >
+                      Dashboard
                   </Link>
                   </li>
                   <li className="nav-item navbar-app" key={5}>
-                    <Link  className="nav-link" to="/page2" >
-                        Task
+                    <Link  className="nav-link" to="/tasks" >
+                        Tasks
                     </Link>
                     </li>
                     <li className="nav-item navbar-app" key={6}>
-                      <Link  className="nav-link" to="/page3" >
-                          Schedule
+                      <Link  className="nav-link" to="/schedules" >
+                          Schedules
                       </Link>
                       </li>
                       <li className="nav-item navbar-app" key={7}>
-                        <Link  className="nav-link" to="/page4" >
-                            Help
+                        <Link  className="nav-link" to="/profile" >
+                            Profile
                         </Link>
                         </li>
                         <li className="nav-item navbar-auth" key={3}>

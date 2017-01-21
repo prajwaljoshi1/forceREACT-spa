@@ -1,4 +1,4 @@
-import {  USERNAME , USER_EMAIL , STRIPE_TOKEN, USER_PASSWORD  } from '../actions/types';
+import {  USERNAME , USER_EMAIL , STRIPE_TOKEN, USER_PASSWORD, USER_FAMILYNAME, USER_GIVENNAME, USER_MOBILE  } from '../actions/types';
 
 export default function(state = {}, action ){
   switch(action.type){
@@ -8,18 +8,12 @@ export default function(state = {}, action ){
         }
     case USER_EMAIL:
       {
-        return {...state, userEmail:action.payload}
-      }
-    case STRIPE_TOKEN:
-      {
-        return {...state , stripeToken:action.payload}
+        return {...state, userEmail:action.payload};
       }
       case USER_PASSWORD:
         {
-          console.log("prajwal => ", action.payload);
-          return {...state , userPassword:action.payload}
+          return {...state, userPassword:action.payload};
         }
-
   }
 
   return  state

@@ -1,6 +1,6 @@
 export default {
-  region: 'us-east-1',
+  region: 'ap-southeast-2',
   IdentityPoolId: '',
-  UserPoolId: 'us-east-1_BCTlxqI9S',
-  ClientId: '5q9vq8tbro1m2pol9dp7jp277i',
+  UserPoolId: 'ap-southeast-2_3IZGtLN0x',
+  ClientId: 'gjc8jr0pjvvaaajltu0f5uhfu',
 }

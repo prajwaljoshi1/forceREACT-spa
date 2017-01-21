@@ -7,7 +7,6 @@ class Signin extends Component{
   handleFormSubmit({email, password}){
     console.log(email, password);
     this.props.signinUser({email:email, password:password})
-
   }
 
   renderAlert(){
@@ -60,8 +59,6 @@ function validate(formProps){
       errors.password = 'Please enter your password'
     }
 
-
-
   return errors;
 }
 
@@ -73,6 +70,8 @@ function mapStateToProps(state){
     errorMessage: state.auth.error
   }
 }
+
+
 
 export default reduxForm({
   form:'Signin',

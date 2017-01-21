@@ -4,8 +4,11 @@ import { browserHistory  } from 'react-router';
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails  } from "amazon-cognito-identity-js";
 import cognitoConfig from "../cognito-config";
 
-import { AUTH_USER , AUTH_ERROR, UNAUTH_USER} from './types';
-import {  USERNAME , USER_EMAIL , STRIPE_TOKEN, USER_PASSWORD } from '../actions/types';
+import { AUTH_USER , AUTH_ERROR, UNAUTH_USER, SUBSCRIPTION_STATUS} from './types';
+import {  USERNAME , USER_EMAIL, USER_PASSWORD } from '../actions/types';
+
+import axios from 'axios';
+import API from '../api-url';
 
 Config.region = cognitoConfig.region;
 Config.credentials = new CognitoIdentityCredentials({
@@ -43,12 +46,30 @@ export function signinUser({ email, password }){
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-            dispatch({type: AUTH_USER});
+
+
+            console.log(result);
+             const authCode = result.idToken.jwtToken ;
+            axios.get(API.getSubscriptionStatus, {
+                       headers: {
+                           'Content-Type':'application/json',
+                           'Authorization': authCode
+                           }
+                         })
+                         .then(function (response) {
+
+                              dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
+                              dispatch({type:AUTH_USER});
+                              console.log("RESPONSE => ", response.data);
+                              browserHistory.push('/dashboard');
+                          });
+
             //save the Json web token
             //localStorage.setItem('token',result.getAccessToken().getJwtToken()); cognito has its own
             //redirect user to home
 
-            browserHistory.push('/home')
+
+
 
         },
 
@@ -79,16 +100,15 @@ export function signinUser({ email, password }){
         Name: 'phone_number',
         Value: mobile
       }),new CognitoUserAttribute({
-        Name: 'birthdate',
-        Value: "00-00-0000"
-      }),new CognitoUserAttribute({
         Name: 'given_name',
         Value: givenName
       })
     ];
 
     return function(dispatch){
-        const username =givenName.toLowerCase() + Date.now().toString();
+        // const username =givenName.toLowerCase() + Date.now().toString();
+        const username = email.replace(/@/g, '.');
+
         userPool.signUp(username, password, attributeList, null, (err, result) => {
             if (err) {
                 dispatch(authError(err.message));
@@ -154,6 +174,12 @@ export function authError(error){
 }
 
 
+
+
+
+
+
+
 export function confirmUser({confirmationCode, username, password} ){
   return function(dispatch){
     const userData = {
@@ -199,6 +225,87 @@ const cognitoUser = new CognitoUser(userData);
 
   }
 };
+
+//old code
+
+
+// function getStripeToken(card){
+//     return  new Promise((res,rej) =>{
+//
+//       Stripe.setPublishableKey(stripeConfig.PublishableKey);
+//       Stripe.card.createToken(card, (status, response) => {
+//         if(response.error){
+//             rej(response.error)
+//         }else{
+//           res(response.id)
+//         }
+//       });
+//     });
+// }
+//
+// export function setStripeToken( {username, cardNumber, CVC, expirationMonth, expirationYear }){
+//
+//       const card = {
+//         number:cardNumber,
+//         exp_month: expirationMonth,
+//         exp_year: expirationYear,
+//         cvc: CVC
+//       }
+//         console.log("USERNAME2:   ", username);
+//
+//
+//
+//       return function(dispatch){
+//       const payload = Scriptly.loadJavascript('https://js.stripe.com/v2/')
+//                               .then(() => (getStripeToken(card)))
+//                               .then((token) => {
+//                                 console.log("success ",dispatch);
+//                                   dispatch(updateStripeToken(username, token));
+//                               })
+//                               .catch((e) => {
+//                                 console.log("failure ",dispatch);
+//                                 dispatch(authError(e.message));
+//                               });
+//
+//
+//       }
+//
+// }
+//
+// function updateStripeToken(username, token){
+//   console.log("USERNAME3:   ", username);
+//
+//
+//   const userData = {
+//     Username : username,
+//     Pool : userPool
+//   };
+//
+//  const cognitoUser = new CognitoUser(userData);
+//
+//   const attributeList = [];
+//   let attribute = {
+//       Name : 'stripe-token',
+//       Value : token
+//     };
+//
+//     attribute = new CognitoUserAttribute(attribute);
+//   attributeList.push(attribute);
+//
+//   cognitoUser.updateAttributes(attributeList, function(err, result) {
+//     if (err) {
+//         return(authError("Something went wrong. Please signup again"));
+//         return;
+//         return ({
+//           type:STRIPE_TOKEN,
+//           payload:token
+//         });
+//           browserHistory.push('/confirmation')
+//     }
+//
+// });
+//
+// }
 
 
 // export function redirectAuthUserToHome({authStatus}){
