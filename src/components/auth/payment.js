@@ -5,7 +5,6 @@ import * as actions from '../../actions';
 class Payment extends Component{
 
   handleFormSubmit(formProps){
-
   this.props.setStripeToken({cardNumber:formProps.cardNumber, CVC:formProps.CVC, expirationMonth:formProps.expirationMonth, expirationYear:formProps.expirationYear})
   }
 

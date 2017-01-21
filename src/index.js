@@ -38,7 +38,7 @@ import API from './api-url';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store =createStoreWithMiddleware(reducers);
-
+console.log("START");
 
 const poolData = {
           UserPoolId : cognitoConfig.UserPoolId,
@@ -47,6 +47,7 @@ const poolData = {
 var userPool = new CognitoUserPool(poolData);
 var cognitoUser = userPool.getCurrentUser();
 if (cognitoUser != null) {
+
      cognitoUser.getSession(function(err, session) {
          if (err) {
             alert(err);
@@ -65,14 +66,14 @@ if (cognitoUser != null) {
 
                            store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
                            console.log("RESPONSE => ", response.data);
-
+                             console.log("START2");
                           renderApp();
 
                         });
 
         });
      }else{
-       renderApp()
+       renderApp();
      }
 
 
