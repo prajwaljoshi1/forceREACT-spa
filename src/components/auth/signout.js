@@ -7,6 +7,7 @@ class Signout extends Component{
 
 
   componentWillMount(){
+    console.log("SIGN OUT USER");
     this.props.signoutUser();
   }
 

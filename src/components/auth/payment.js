@@ -8,6 +8,12 @@ class Payment extends Component{
   this.props.setStripeToken({cardNumber:formProps.cardNumber, CVC:formProps.CVC, expirationMonth:formProps.expirationMonth, expirationYear:formProps.expirationYear})
   }
 
+  handleSignout(e){
+    e.preventDefault();
+    console.log("SIGN OUT USER");
+    this.props.signoutUser();
+  }
+
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -24,7 +30,13 @@ class Payment extends Component{
     const { handleSubmit, fields: {cardNumber,CVC,expirationMonth,expirationYear}} = this.props;
 
     return(
+
+
+
         <div className="container">
+        <div className="text-right">
+        <a href="#" className="" onClick={this.handleSignout.bind(this)}>Signout</a>
+            </div>
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <fieldset className="form-group">
@@ -56,9 +68,10 @@ class Payment extends Component{
           <fieldset>
           {this.renderAlert()}
             </fieldset>
-          <button action="submit" className="btn btn-primary">Send Details</button>
+          <button action="submit" className="btn btn-primary">Send Card Details</button>
       </form>
-    </div>);
+
+  </div>);
   }
 }
 
