@@ -25,8 +25,6 @@ class App extends Component {
 
       this.setState({toggled: true});
     }
-
-
   }
 
 
@@ -51,7 +49,7 @@ class App extends Component {
                   </div>
                   <div className="page-content-wrapper">
                   <div className="container-fluid">
-                    <a href="#" className="btn btn-default btn-lg" onClick={this.toggleSidenav.bind(this)}> Menu</a>
+                    <a href="#" className="btn btn-default btn-lg btn-sidenav-toggle" onClick={this.toggleSidenav.bind(this)}> Menu</a>
                     <div className="container">
                           {this.props.children}
                     </div>

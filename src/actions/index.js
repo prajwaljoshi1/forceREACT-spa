@@ -61,9 +61,9 @@ export function signinUser({ email, password }){
                          })
                          .then(function (response) {
 
-                              dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
+                              dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
                               dispatch({type:AUTH_USER});
-                              console.log("RESPONSE => ", response.data);
+                              console.log("RESPONSE => ", response.data.status);
                               browserHistory.push('/dashboard');
                           });
 
@@ -285,7 +285,7 @@ function startSubscription( token){
   // var userPool = new CognitoUserPool(poolData);
 
   return function(dispatch){
-    console.log("LEVEL3");
+
 
     var cognitoUser = userPool.getCurrentUser();
     if (cognitoUser != null) {
@@ -308,9 +308,9 @@ function startSubscription( token){
                           })
                           .then(function (response) {
                               console.log("LEVEL4");
-                               store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
-                               console.log("RESPONSE => ", response.data);
-                               browserHistory.push('/dashboard');
+                               store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
+                               console.log("RESPONSE => ", response.data.status);
+                               browserHistory.push('/newsalesforceorg');
 
                             }).catch(function(err){
                               console.log("LEVEL4 err", token);

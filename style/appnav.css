@@ -97,7 +97,7 @@
     background: none;
 }
 
-@media(min-width:2000px) {
+@media(min-width:1024px) {
     .application-wrapper {
         padding-left: 250px;
     }
@@ -124,4 +124,12 @@
         position: relative;
         margin-right: 0;
     }
+
+    .btn-sidenav-toggle{
+      display: none
+    }
+}
+
+@media(max-width:1024px) {
+
 }

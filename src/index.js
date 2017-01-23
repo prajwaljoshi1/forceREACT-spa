@@ -26,8 +26,13 @@ import Dashboard from './components/dashboard';
 import Tasks from './components/tasks';
 import Schedules from './components/schedules';
 import Profile from './components/profile';
-import RequireAuth from './components/auth/require_auth';
+import RequireAuth from './middleware/require_auth';
 import Landing from './components/landing';
+
+// forceREACT Specific components
+
+import NewSalesforceOrg from './components/forcereact/new-salesforceorg';
+
 import { AUTH_USER, SUBSCRIPTION_STATUS } from './actions/types';
 import cognitoConfig from './cognito-config';
 import axios from  'axios';
@@ -38,7 +43,7 @@ import API from './api-url';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store =createStoreWithMiddleware(reducers);
-console.log("START");
+
 
 const poolData = {
           UserPoolId : cognitoConfig.UserPoolId,
@@ -64,8 +69,8 @@ if (cognitoUser != null) {
                       })
                       .then(function (response) {
 
-                           store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data});
-                           console.log("RESPONSE => ", response.data);
+                           store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
+                           console.log("RESPONSE => ", response.data.status);
                              console.log("START2");
                           renderApp();
 
@@ -93,6 +98,7 @@ if (cognitoUser != null) {
           <Route path="/tasks" component={RequireAuth(Tasks)} />
           <Route path="/schedules" component={RequireAuth(Schedules)} />
           <Route path="/profile" component={RequireAuth(Profile)} />
+          <Route path="/newsalesforceorg" component={RequireAuth(NewSalesforceOrg)} />
          </Route>
         </Router>
       </Provider>
