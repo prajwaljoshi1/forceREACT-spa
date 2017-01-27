@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
+import HeaderUser from './header-user';
 
 export default class Profile extends Component {
   render() {
     return (
       <div>
-       <h1>User Profile</h1>
+        <HeaderUser/>
+       <h3>Profile</h3>
       </div>
     );
   }

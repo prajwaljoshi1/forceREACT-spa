@@ -1,0 +1,121 @@
+body {
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  font-stretch: condensed;
+  word-break: break-word;
+  font-size: 10pt;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+h1 {
+  font-size: 3em;
+}
+
+
+input, .floating-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-stretch: condensed;
+  font-size: 20pt;
+  line-height: 2.2em;
+  height: 60px;
+  margin: 0 auto;
+  padding: 0;
+  width: 66%;
+}
+
+.floating-placeholder input:focus + label {
+  color: #ED7C31;
+}
+
+.floating-placeholder input[value] + label {
+  color:  #ED7C31;
+}
+
+.floating-placeholder {
+  position: relative;
+}
+
+.floating-placeholder input {
+  font-size: 2rem;
+  border:  1px solid #DDD;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background: transparent;
+  z-index: 2;
+  border-bottom: 1px solid #DDD;
+  border-radius: 1px;
+  text-indent: 20px;
+  word-break: break-all;
+  padding-top: 5px;
+  width: 100%;
+
+}
+.floating-placeholder input#email {
+    /*border: solid 1px #ccc;*/
+    /*border-radius: 3px;*/
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.floating-placeholder input#password {
+    /*border-top: none!important;*/
+    /*border: solid 1px #ccc;*/
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.floating-placeholder input#first_name{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.floating-placeholder input#cc_number{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.floating-placeholder input#email_login {
+    /*border: solid 1px #ccc;*/
+    /*border-radius: 3px;*/
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.floating-placeholder:last-child input {
+  border-bottom: none;
+}
+
+.floating-placeholder label {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-size: 2rem;
+  z-index: 1;
+  -moz-transform-origin: 0 0em;
+  -ms-transform-origin: 0 0em;
+  -webkit-transform-origin: 0 0em;
+  transform-origin: 0 0em;
+  -moz-transition: -moz-transform 160ms, color 200ms;
+  -o-transition: -o-transform 160ms, color 200ms;
+  -webkit-transition: -webkit-transform 160ms, color 200ms;
+  transition: transform 160ms, color 200ms;
+  -moz-transform: scale(1, 1) rotateY(0);
+  -ms-transform: scale(1, 1) rotateY(0);
+  -webkit-transform: scale(1, 1) rotateY(0);
+  transform: scale(1, 1) rotateY(0);
+  color:  #ED7C31;
+}
+input:focus + label,
+.floating-placeholder-float label {
+  -moz-transform: scale(0.55, 0.55) rotateY(0);
+  -ms-transform: scale(0.55, 0.55) rotateY(0);
+  -webkit-transform: scale(0.55, 0.55) rotateY(0);
+  transform: scale(0.55, 0.55) rotateY(0);
+  z-index: 3;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}

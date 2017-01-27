@@ -16,6 +16,10 @@ class App extends Component {
     this.state = {toggled: false};
 }
 
+componentWillMount(){
+  
+}
+
 
   toggleSidenav(e){
     e.preventDefault();
@@ -37,10 +41,11 @@ class App extends Component {
     let classes = classNames('application-wrapper', {toggled: this.state.toggled});
 
       if(this.props.authenticated){
-        console.log(this.props.authenticated);
-        console.log(this.props.subscriptionStatus);
 
         if(this.props.subscriptionStatus === 'ACTIVE'){
+
+
+
             return (
               <div>
                 <div className={classes}>
@@ -59,7 +64,7 @@ class App extends Component {
               </div>
             );
           }else if(this.props.subscriptionStatus === 'INACTIVE'){
-            console.log("rerer");
+            console.log("profile page");
           } else if(this.props.subscriptionStatus === 'UNSIGNED'){
 
             return (<div>

@@ -1,0 +1,33 @@
+body{
+  color: #555555;
+}
+
+.index-link{
+    display:inline-block;
+    width:100%;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+}
+
+.index-link:hover{
+  color: #fff;
+  transition: all 0.5s ease 0s;
+  text-decoration: none;
+
+}
+
+.index-list:hover{
+      color: #fff;
+    background-color: #0275d8;
+    transition: all 0.5s ease 0s;
+}
+
+.page-content{
+  margin-top: 7em;
+}
+
+.page-title{
+  padding:1em 0 0.5em 0;
+}

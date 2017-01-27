@@ -1,0 +1,92 @@
+
+
+
+.width-16em{
+  width:16em;
+}
+
+.width-100pc{
+  width: 100%;
+}
+
+.width-100px{
+  width: 100px;
+}
+
+.width-300px{
+  width: 300px;
+}
+
+.display-none{
+  display: none;
+}
+
+
+
+
+
+
+/*
+.black {
+    background-color: #2e2e2e;
+}
+
+.orange {
+    color: #ED7C31;
+}*/
+
+/* 2. Header */
+/*header {
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: solid 2px #ED7C31;
+    background-color: #2e2e2e;
+}*/
+
+
+/* 4. Buttons */
+.taskQueryForm .chooseBtn {
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    padding: 2px 10px;
+    min-width: 100px;
+    max-width: 200px;
+    width:auto;
+    overflow-x:hidden;
+    margin: 0 5px;
+    line-height: 1;
+}
+
+.chooseBtn.disabled {
+    cursor:default;
+    opacity: 0.2;
+}
+
+.chooseBtn.disabled:hover, .chooseBtn.disabled:focus {
+    outline:0;
+    border: solid 1px;
+    cursor:default;
+    opacity: 0.2;
+}
+
+
+/* 5. Forms */
+form .input-group label {
+    font-weight: normal;
+    min-width: 100px;
+}
+
+form input[type="text"],form textarea,form input[type="button"], form select {
+    font-family: 'Open Sans', sans-serif;
+    height: 30px;
+    margin: 2px 5px;
+    padding: 0 5px;
+    width: 60%;
+    min-width: 200px;
+}
+
+input[type="checkbox"] {
+    width:auto;
+}

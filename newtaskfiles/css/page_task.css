@@ -1,0 +1,320 @@
+/** ---------- General ForceREACT CSS ---------- **/
+
+
+/*
+Index:
+1. General
+2. Header
+3. Footer
+4. Buttons
+*/
+
+
+/** ------------------------------------------- **/
+
+
+/* 1. General */
+
+#soqlQueryForm,
+#exportsObjectForm {
+    display: none;
+    opacity: 0;
+}
+
+#query_form {
+    border: solid 1px #CCC;
+    padding: 10px;
+    margin: 10px;
+}
+
+section#dashboard {
+    display: block;
+    height: auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+section #screenPanel {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#screenPanel h1 {
+
+}
+
+.switchSourceType {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.taskPanelGlyphBtn {
+    padding: 0 10px 0 0;
+    font-size: 2rem;
+    vertical-align: middle;
+    margin: 0;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.taskPanelGlyphBtn:hover,
+.taskPanelGlyphBtn:active,
+.taskPanelGlyphBtn:focus,
+{
+    outline: 0;
+}
+
+#codeMirrorText {
+    width: 90%;
+    margin: 20px auto;
+    display: block;
+    height: auto;
+    overflow: hidden;
+}
+
+#myQuery {
+    width: 100%;
+    height: 100px;
+    padding: 2px;
+    color: #FFF;
+    background: #282828;
+}
+
+.sourceOption input[type="radio"] {
+    width: 15px;
+    display: inline-block;
+    height: auto;
+    margin: 0 5px;
+}
+
+.exportSource .queryObjectFieldWrap {
+    display: inline-block;
+    height: 35px;
+}
+
+.exportSource .queryObjectField {
+    height: 32px;
+}
+
+.exportSource .queryObjectConfirmWrap {
+    display: inline-block;
+}
+
+.chooseSource.choosePanel {
+    display: none;
+    opacity: 0;
+}
+
+#taskImport .chooseBtn.selectObjectBtn {
+    min-width: 20px;
+    padding: 2px;
+}
+
+span.objectConfirm {
+    padding: 0;
+}
+
+#codeMirrorWindow {
+    border: solid 1px #CCC;
+    max-height: 100px;
+    height: auto;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+}
+
+.btn-group {
+    border: solid 1px #AAA;
+    border-radius: 5px;
+}
+
+.btn-group .btn-secondary {
+    background-color: #BBB;
+    display: none;
+}
+
+.btn-group .btn-secondary.selected {
+    border-radius: 5px!important;
+    margin-left: 0!important;
+    background-color: #EEE;
+    display: block;
+}
+
+#queryLimitField {
+    width: 100px;
+    font-size: 1.5rem;
+    height: 30px;
+    padding: 0 2px;
+}
+
+.wizardColumn1 {
+    width: 300px;
+    padding-right: 20px;
+}
+
+#selectAllObjectFieldsBtn {
+    float: right;
+}
+
+.queryObjectWrappers {
+    display: none;
+    opacity: 0;
+}
+
+.select2-search__field {
+    font-size: 1.5rem;
+    height: 30px;
+}
+
+.taskProgressWrap .progressStep {
+    font-size: 5rem;
+    color: #CCC;
+    text-align: center;
+    width: 120px;
+    height: 110px;
+    margin: 0 auto;
+}
+
+.taskProgressWrap .progressStep.doing {
+    color: #000;
+}
+
+.taskProgressWrap .progressStep.done {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.taskProgressWrap .progressStep p {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.jsgrid-table {
+    width: 100%!important;
+}
+
+.panel-body .btn-block.chooseBtn {
+    max-width: none;
+    margin: 0;
+}
+
+
+/*-- Export Template Form --*/
+
+.sectionSeparator {
+    display: block;
+    height: 50px;
+}
+
+.queryTypeFieldBtn {
+    border: solid 1px #CCC;
+    border-radius: 3px;
+    width: 100%!important;
+    background: transparent;
+    font-size: 1.5rem;
+    outline: 0;
+}
+
+.queryTypeFieldBtn.selected {
+    background: #EEE;
+    font-weight: 600;
+}
+
+
+/*-- Draggable Fiel Elements --*/
+
+#taskExport .dataResults {
+    text-align: center;
+}
+
+#taskExport .dropField.connectionField.highlight,
+#taskExport .dropField.connectionField.empty.highlight {
+    border-color: #000;
+    transition: all 0.2s;
+}
+
+#taskExport .dropField.connectionField.empty {
+    border: 2px dashed #CCC;
+    font-weight: 600;
+    cursor: default;
+}
+
+#taskExport .dropField {
+    min-width: 230px;
+    border: solid 1px #CCC;
+    border-radius: 3px;
+    text-align: center;
+    height: 40px;
+    padding-top: 7px;
+    margin: 2px 0;
+    cursor: pointer;
+    background: #FFF;
+    z-index: 10;
+}
+
+#taskExport h3 {
+    color: #ED7C31;
+}
+
+#taskExport .exportObjectConnnectionWrap h3 {
+    text-align: center;
+}
+
+.exportObjectConnnectionWrap .connectionWrap {
+    height: auto;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+}
+
+.exportObjectConnnectionWrap .connectionListItem {
+    height: auto;
+    overflow-y: hidden;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.exportObjectConnnectionWrap .connectionSeparator {
+    display: inline-block;
+    padding-top: 11px;
+    cursor: pointer;
+    color: #CCC;
+}
+
+.exportObjectConnnectionWrap .connectionSeparator:hover {
+    color: #000;
+}
+
+.exportObjectConnnectionWrap .andSeparator {
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.exportObjectConnnectionWrap .dropField.connectionField {
+    display: inline-block;
+    width: 45%;
+}
+
+.exportObjectConnnectionWrap .dropField.connectionField.resultConnection {
+    float: left;
+}
+
+.exportObjectConnnectionWrap .dropField.connectionField.targetConnection {
+    float: right;
+}
+
+.targetFields .targetField .glyphicon {
+    color: #bc2328;
+}
+
+.submissionWrap {
+    margin: 10px auto;
+}
+
+#taskExport .submissionWrap .chooseBtn {
+    width: 40%;
+    max-width: none;
+    margin: 0 10px;
+}

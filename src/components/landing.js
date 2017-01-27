@@ -25,7 +25,7 @@ class Landing extends Component{
           <header className="header-image">
             <div className="headline">
               <div className="container">
-                <h1>theme<span className="bold">REACT</span></h1>
+                <h1>force<span className="bold">REACT</span></h1>
               </div>
             </div>
           </header>

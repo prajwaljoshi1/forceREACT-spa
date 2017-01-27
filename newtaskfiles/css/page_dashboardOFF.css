@@ -1,0 +1,46 @@
+/** ---------- General ForceREACT CSS ---------- **/
+/*
+Index:
+1. General
+2. Header
+3. Footer
+4. Buttons
+*/
+/** ------------------------------------------- **/
+/* 1. General */
+section#dashboard {
+    display: block;
+    height: auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+section #screenPanel {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#screenPanel h1 {
+    font-size: 2.5rem;
+}
+
+#codeMirrorText {
+    width: 90%;
+    margin: 20px auto;
+    display: block;
+    height: auto;
+    overflow:hidden;
+}
+
+.choosePanel {
+    display:none;
+}
+
+#myQuery {
+    width: 100%;
+    height: 100px;
+    padding: 2px;
+    color: #FFF;
+    background: #282828;
+}

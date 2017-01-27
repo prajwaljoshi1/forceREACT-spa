@@ -12,24 +12,24 @@ import { Link } from 'react-router';
             <ul className="sidebar-nav">
                 <li className="sidebar-brand">
                     <a href="/dashboard">
-                        themeREACT
+                        forceREACT
                     </a>
                 </li>
                 <li className="nav-item navbar-app" key={4}>
                   <Link  className="nav-link" to="/dashboard" >
                       Dashboard
                   </Link>
-                  </li>
-                  <li className="nav-item navbar-app" key={5}>
-                    <Link  className="nav-link" to="/tasks" >
-                        Tasks
+                </li>
+                <li className="nav-item navbar-app" key={5}>
+                  <Link  className="nav-link" to="/tasks" >
+                      Tasks
+                  </Link>
+                </li>
+                  <li className="nav-item navbar-app" key={6}>
+                    <Link  className="nav-link" to="/events" >
+                        Events
                     </Link>
-                    </li>
-                    <li className="nav-item navbar-app" key={6}>
-                      <Link  className="nav-link" to="/schedules" >
-                          Schedules
-                      </Link>
-                      </li>
+                  </li>
                       <li className="nav-item navbar-app" key={7}>
                         <Link  className="nav-link" to="/profile" >
                             Profile
