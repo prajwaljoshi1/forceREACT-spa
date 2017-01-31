@@ -20,7 +20,8 @@ import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
 import Payment from './components/auth/payment';
-import Confirmation from './components/auth/Confirmation';
+import Confirmation from './components/auth/confirmation';
+import ForgotPassword from './components/auth/forgotpassword';
 
 import Dashboard from './components/forcereact/dashboard';
 import Schedules from './components/schedules';
@@ -41,7 +42,7 @@ import SalesforceOrgs from './components/forcereact/salesforceorgs';
 
 
 
-import { AUTH_USER, SUBSCRIPTION_STATUS } from './actions/types';
+import { AUTH_USER, SUBSCRIPTION_STATUS , ACTIVE_SALESFORCEORG } from './actions/types';
 import cognitoConfig from './cognito-config';
 import axios from  'axios';
 
@@ -80,7 +81,12 @@ if (cognitoUser != null) {
                            store.dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
                            console.log("RESPONSE => ", response.data.status);
 
-                           
+                          const activeSalesforceOrg = localStorage.getItem('salesforceOrg');
+                          if(activeSalesforceOrg){
+                            store.dispatch({type:ACTIVE_SALESFORCEORG, payload: JSON.parse(activeSalesforceOrg)});
+                          }
+
+
 
                           renderApp();
 
@@ -104,6 +110,7 @@ if (cognitoUser != null) {
           <Route path="/confirmation" component={Confirmation} />
           <Route path="/payment" component={RequireAuth(Payment)} />
           <Route path="/signout" component={RequireAuth(Signout)} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/dashboard" component={RequireAuth(Dashboard)} />
 
           <Route path="/tasks" component={RequireAuth(Tasks)}/>

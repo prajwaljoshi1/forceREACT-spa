@@ -49,7 +49,7 @@ export function signinUser({ email, password }){
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-
+              console.dir(result);
 
             console.log(result);
              const authCode = result.idToken.jwtToken ;
@@ -61,10 +61,28 @@ export function signinUser({ email, password }){
                          })
                          .then(function (response) {
 
-                              dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
-                              dispatch({type:AUTH_USER});
-                              console.log("RESPONSE => ", response.data.status);
-                              browserHistory.push('/dashboard');
+                           cognitoUser.getUserAttributes(function(err, result) {
+                              if (err) {
+                                  alert(err);
+                                  return;
+                              }
+                              for (let i = 0;  i < result.length; i++) {
+
+                                  if( result[i].getName() ==='given_name'){
+                                    console.log("one");
+                                      localStorage.setItem('currentUser_givenName', result[i].getValue());
+                                  }
+                                  if( result[i].getName() ==='family_name'){
+                                      localStorage.setItem('currentUser_familyName', result[i].getValue());
+                                  }
+                                }
+
+                                dispatch({type:SUBSCRIPTION_STATUS, payload: response.data.status});
+                                dispatch({type:AUTH_USER});
+                                browserHistory.push('/dashboard');
+                              });
+
+
                           });
 
             //save the Json web token

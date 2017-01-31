@@ -1,11 +1,11 @@
 import React, { Component} from 'react';
 import {reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+import { browserHistory  } from 'react-router';
 
 class Signin extends Component{
 
   handleFormSubmit({email, password}){
-    console.log(email, password);
     this.props.signinUser({email:email, password:password})
   }
 
@@ -17,6 +17,10 @@ class Signin extends Component{
             </div>
       );
     }
+  }
+
+  handleForgotPasswordClick(){
+    browserHistory.push('/forgotpassword');
   }
 
   render(){
@@ -42,6 +46,8 @@ class Signin extends Component{
         </fieldset>
         <button action="submit"  className="btn btn-primary">Sign in</button>
       </form>
+      <a href="#" className="" onClick={this.handleForgotPasswordClick.bind(this)}>Forgot Password</a>
+
     </div>)
   }
 

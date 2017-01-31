@@ -8,6 +8,8 @@ import classNames from 'classNames'
 
 import Payment from './auth/payment'
 
+import SalesforceOrgs from './forcereact/salesforceorgs';
+
 
 class App extends Component {
 
@@ -17,7 +19,7 @@ class App extends Component {
 }
 
 componentWillMount(){
-  
+
 }
 
 
@@ -36,14 +38,21 @@ componentWillMount(){
 
 
 
+
   render() {
+   console.log("APP RENDER");
 
     let classes = classNames('application-wrapper', {toggled: this.state.toggled});
 
       if(this.props.authenticated){
 
         if(this.props.subscriptionStatus === 'ACTIVE'){
-
+          console.log("TEST => ", this.props.activeSalesforceOrg);
+            if(!this.props.activeSalesforceOrg.id){
+                return (
+                  <SalesforceOrgs />
+                )
+            }
 
 
             return (
@@ -92,7 +101,8 @@ componentWillMount(){
 function mapStateToProps(state){
   return{
     authenticated: state.auth.authenticated,
-    subscriptionStatus: state.auth.subscriptionStatus
+    subscriptionStatus: state.auth.subscriptionStatus,
+    activeSalesforceOrg: state.forcereact.activeSalesforceOrg
   };
 }
 

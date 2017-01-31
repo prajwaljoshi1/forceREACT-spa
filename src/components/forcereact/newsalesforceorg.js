@@ -42,7 +42,7 @@ class NewSalesforceOrg extends Component{
         <fieldset className="form-group">
           {this.renderAlert()}
         </fieldset>
-        <button action="submit"  className="btn btn-primary">Add Salesforce Account</button>
+        <button action="submit"  className="btn btn-primary">Add  Account to forceREACT</button>
       </form>
     </div>)
   }
@@ -58,7 +58,7 @@ function validate(formProps){
     }
 
     if(!formProps.password){
-      errors.password = 'Please Salesforce password'
+      errors.password = 'Please enter Salesforce password'
     }
 
   return errors;
